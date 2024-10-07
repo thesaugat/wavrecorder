@@ -17,8 +17,12 @@
             android:layout_height="?attr/actionBarSize"
             app:titleTextColor="@color/black"
             app:subtitleTextColor="@color/black"
+            app:titleCentered="true"
             android:background="@color/white"
+            app:collapseIcon="@drawable/music"
             app:popupTheme="@style/Theme.FakeGuard.PopupOverlay" />
+
+
 
     </com.google.android.material.appbar.AppBarLayout>
 

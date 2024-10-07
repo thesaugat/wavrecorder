@@ -12,7 +12,7 @@
         android:layout_width="250dp"
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
-        android:padding="32dp"
+        android:padding="22dp"
         android:src="@drawable/music" />
 
     <TextView
@@ -23,19 +23,39 @@
         android:layout_below="@id/callIV"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="90dp"
+        android:padding="10dp"
         android:text="00:00"
         android:textColor="#3F51B5"
         android:textSize="36sp" />
 
-    <Button
-        android:id="@+id/start_record_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/recording_time"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="Start Recording"
-        android:textSize="18sp" />
+<!--    <Button-->
+<!--        android:id="@+id/start_record_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/recording_time"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:text="Start Recording"-->
+<!--        android:textSize="18sp" />-->
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/start_record_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:backgroundTint="@color/white"
+            android:layout_centerInParent="true"
+            android:elevation="10dp"
+            android:src="@drawable/record_982_svgrepo_com"
+            app:fabSize="normal"
+            app:layout_anchorGravity="center"
+            android:layout_below="@id/recording_time"
+            app:tint="#FF0000"
+            tools:layout_editor_absoluteX="177dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+
+
 
 
     <Button

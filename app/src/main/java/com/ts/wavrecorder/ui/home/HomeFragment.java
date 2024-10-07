@@ -4,6 +4,7 @@ import android.Manifest;
 
 import android.content.pm.PackageManager;
 
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import androidx.annotation.RequiresPermission;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ts.wavrecorder.R;
 import com.ts.wavrecorder.databinding.FragmentHomeBinding;
 
@@ -39,7 +41,8 @@ public class HomeFragment extends Fragment {
 
 
     private ExecutorService executorService;
-    private Button startRecordButton, playButton;
+    private Button playButton;
+    private FloatingActionButton startRecordButton;
     private TextView recordingTimeText;
     private boolean isRecording = false;
     private String wavFilePath;
@@ -194,9 +197,10 @@ public class HomeFragment extends Fragment {
 
     private void enableStart(boolean b) {
         if (b) {
-            startRecordButton.setText("Start Recording");
+
+            startRecordButton.setImageDrawable(getContext().getDrawable(R.drawable.record_982_svgrepo_com));
         } else {
-            startRecordButton.setText("Stop Recording");
+            startRecordButton.setImageDrawable(getContext().getDrawable(R.drawable.baseline_stop_24));
         }
     }
 
@@ -209,19 +213,21 @@ public class HomeFragment extends Fragment {
             timerHandler.removeCallbacks(updateTimerThread);
 
             enableStart(true);
-            recordingTimeText.setText(lastRecord +"   "+ getFileSizeInKB(wavFilePath));
+            recordingTimeText.setText(lastRecord + "   " + getFileSizeInKB(wavFilePath));
             playButton.setEnabled(true);
 
 
         }
     }
-    public  long getFileSizeInKB(String filePath) {
+
+    public long getFileSizeInKB(String filePath) {
         File file = new File(filePath);
         if (file.exists() && file.isFile()) {
             return file.length() / 1024; // Convert bytes to KB
         }
         return -1; // Return -1 if file doesn't exist or is not a regular file
     }
+
     // Timer thread to update the recording time
     private Runnable updateTimerThread = new Runnable() {
         public void run() {

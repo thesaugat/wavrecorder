@@ -22,10 +22,10 @@ public class AudioFilesAdapter extends RecyclerView.Adapter<AudioFilesAdapter.Au
     private Context context;
     private MediaPlayer mediaPlayer;
 
-    public AudioFilesAdapter(Context context, List<File> audioFiles) {
+    public AudioFilesAdapter(Context context, List<File> audioFiles, MediaPlayer mediaPlayer) {
         this.context = context;
         this.audioFiles = audioFiles;
-        this.mediaPlayer = new MediaPlayer();
+        this.mediaPlayer = mediaPlayer;
     }
 
     @NonNull
@@ -50,6 +50,13 @@ public class AudioFilesAdapter extends RecyclerView.Adapter<AudioFilesAdapter.Au
                 mediaPlayer.setDataSource(audioFile.getAbsolutePath());
                 mediaPlayer.prepare();
                 mediaPlayer.start();
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mediaPlayer.stop();
+                        mediaPlayer.reset(); // Reset the MediaPlayer after playing
+                    }
+                });
             } catch (IOException e) {
                 e.printStackTrace();
             }

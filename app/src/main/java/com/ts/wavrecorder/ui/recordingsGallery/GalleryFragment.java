@@ -1,5 +1,6 @@
 package com.ts.wavrecorder.ui.recordingsGallery;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ public class GalleryFragment extends Fragment {
     private RecyclerView recyclerView;
     private AudioFilesAdapter adapter;
     private FragmentGalleryBinding binding;
+    private MediaPlayer mediaPlayer;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,9 +35,9 @@ public class GalleryFragment extends Fragment {
 
         // Get the list of .wav files from internal storage
         List<File> audioFiles = getAudioFiles();
-
+        mediaPlayer = new MediaPlayer();
         // Set the adapter with the list of files
-        adapter = new AudioFilesAdapter(getContext(), audioFiles);
+        adapter = new AudioFilesAdapter(getContext(), audioFiles, mediaPlayer);
         recyclerView.setAdapter(adapter);
 
         return view;
@@ -44,8 +46,13 @@ public class GalleryFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
         binding = null;
     }
+
     // Function to get all .wav files from the internal storage
     private List<File> getAudioFiles() {
         List<File> audioFiles = new ArrayList<>();
@@ -60,4 +67,5 @@ public class GalleryFragment extends Fragment {
         }
         return audioFiles;
     }
+
 }
